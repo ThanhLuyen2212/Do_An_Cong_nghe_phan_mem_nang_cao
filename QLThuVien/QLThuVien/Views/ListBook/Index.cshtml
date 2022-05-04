@@ -52,19 +52,20 @@
     <div class="row">
         @foreach (var pro in Model)
         {
+        <a href="~/ChiTietCuonSach/Index/@pro.IDSach">
             <div class=" col-sm-12 col-sm-6 col-md-4 col-lg-3" id="card">
                 <div class="box-book">
                     @*<p> @Html.DisplayFor(Model => pro.IDSach)</p>*@
                     <img src=" @Url.Content(pro.HinhAnh)" height="150" width="150" />
                     <p>  @Html.DisplayFor(Model => pro.TenSach)</p>
                     <p>Số Lượng : @Html.DisplayFor(Model => pro.SoLuong)</p>
-                    <p class="btn btn-primary">@Html.ActionLink("Mượn sách","Addto","GioSach",new {id = pro.IDSach},"")</p>
+                    <p class="btn btn-primary">@Html.ActionLink("Mượn sách", "Addto", "GioSach", new { id = pro.IDSach }, "")</p>
                     @*<p><a href="/GioSach/AddTo/@pro.IDSach" class="btn btn-primary">Mượn Sách</a></p>*@
 
                 </div>
 
             </div>
-
+        </a>
         }
     </div>
 </div>

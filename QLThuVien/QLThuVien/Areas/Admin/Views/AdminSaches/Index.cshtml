@@ -1,0 +1,108 @@
+﻿@model IEnumerable<QLThuVien.Models.Sach>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm("Index", "AdminSaches"))
+{
+
+    <ul class="navbar-nav w-100">
+        <li class="nav-item w-100">
+            <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                <input type="text" class="form-control" placeholder="Search products" name="tensach">
+            </form>
+        </li>
+    </ul>
+
+
+
+
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Striped Table</h4>
+                <p class="card-description">
+                    Add class <code>.table-striped</code>
+                </p>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Tên sách</th>
+                                <th>Mô tả</th>
+                                <th>Tác giả</th>
+                                <th>Ngày sản xuất</th>
+                                <th>Số lượng</th>
+                                <th>Hình ảnh</th>
+                                <th>Thể loại</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="width:5%">
+                                        @Html.DisplayFor(modelItem => item.TenSach)
+                                    </td>
+                                    <td style="white-space:normal; width:30%">
+                                        @Html.DisplayFor(modelItem => item.MoTa)
+                                    </td>
+                                    <td style="width:5%">
+                                        @Html.DisplayFor(modelItem => item.TacGia)
+                                    </td>
+                                    <td style="width:5%">
+                                        @Html.DisplayFor(modelItem => item.NgayXuatBan)
+                                    </td>
+                                    <td style="width:5%">
+                                        @Html.DisplayFor(modelItem => item.SoLuong)
+                                    </td>
+                                    <td style="width:15%">
+                                        <img src="@Url.Content(item.HinhAnh)" style="width:150px; height:200px; border-radius:0%" />
+                                    </td>
+                                    <td style="width:10%">
+                                        @Html.DisplayFor(modelItem => item.TheLoai1.NameCate)
+                                    </td>
+                                    <td style="width:25%">
+                                        <a href="~/Admin/AdminSaches/Edit/@item.IDSach">
+                                            <button type="button" class="btn btn-inverse-success btn-fw">Edit</button>
+                                        </a>
+                                        <br /> 
+                                        <a href="~/Admin/AdminSaches/Details/@item.IDSach">
+                                            <button type="button" class="btn btn-inverse-warning btn-fw">Detail</button>
+                                        </a>                                       
+                                        <br />
+                                        <a href="~/Admin/AdminSaches/Delete/@item.IDSach">
+                                            <button type="button" class="btn btn-inverse-danger btn-fw">Delete</button>
+                                        </a>                                        
+                                    </td>
+                                </tr>
+                            }
+
+
+
+                        </tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    
+
+}
+
+

@@ -16,6 +16,7 @@ namespace QLThuVien.Models
 
     public partial class Sach
     {
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Sach()
         {
@@ -29,6 +30,8 @@ namespace QLThuVien.Models
         public string TheLoai { get; set; }
         public string MoTa { get; set; }
         public string TacGia { get; set; }
+
+      
         public Nullable<System.DateTime> NgayXuatBan { get; set; }
         public Nullable<int> SoLuong { get; set; }
         public string HinhAnh { get; set; }

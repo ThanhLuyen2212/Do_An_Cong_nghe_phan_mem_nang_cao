@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using QLThuVien.Models;
+using Rotativa;
 
 namespace QLThuVien.Areas.Admin.Controllers
 {
@@ -15,9 +16,46 @@ namespace QLThuVien.Areas.Admin.Controllers
         private QuanLyThuVienEntities db = new QuanLyThuVienEntities();
 
         // GET: Admin/AdminDocGias
-        public ActionResult Index()
+        public ActionResult Index(string TenDG)
         {
-            return View(db.DocGias.ToList());
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("Index", "AdminLogin", new { Areas = "Admin" });
+            }else
+            if (TenDG != null)
+                {
+                    List<DocGia> docGias = db.DocGias.Where(c => c.TenDG == TenDG).ToList();
+                    if (docGias.Count > 0)
+                    {
+                        return View(docGias);
+                    }
+                    return View(db.DocGias.ToList());
+                }
+                return View(db.DocGias.ToList());
+            
+            
+        }
+
+        static string tempp = "1";
+        public ActionResult ExportPDF()
+        {
+            
+            DocGia docGia = db.DocGias.Find(int.Parse(tempp));
+            if (docGia == null)
+            {
+                return HttpNotFound();
+            }
+            return View(docGia);
+        }
+
+        public ActionResult PrintViewToPdf(string id)
+        {
+            tempp = id;
+            return new ActionAsPdf("ExportPDF")
+            {
+                FileName = "test.pdf"
+            };
+            
         }
 
         // GET: Admin/AdminDocGias/Details/5
@@ -27,7 +65,7 @@ namespace QLThuVien.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DocGia docGia = db.DocGias.Find(id);
+            DocGia docGia = db.DocGias.Find(int.Parse(id));
             if (docGia == null)
             {
                 return HttpNotFound();
@@ -65,7 +103,7 @@ namespace QLThuVien.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DocGia docGia = db.DocGias.Find(id);
+            DocGia docGia = db.DocGias.Find(int.Parse(id));
             if (docGia == null)
             {
                 return HttpNotFound();
@@ -81,7 +119,7 @@ namespace QLThuVien.Areas.Admin.Controllers
         public ActionResult Edit([Bind(Include = "IDDG,TenDG,DienThoai,DiaChi,UserName,Password")] DocGia docGia)
         {
             if (ModelState.IsValid)
-            {
+            {                
                 db.Entry(docGia).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -96,7 +134,7 @@ namespace QLThuVien.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DocGia docGia = db.DocGias.Find(id);
+            DocGia docGia = db.DocGias.Find(int.Parse(id));
             if (docGia == null)
             {
                 return HttpNotFound();
@@ -109,7 +147,7 @@ namespace QLThuVien.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            DocGia docGia = db.DocGias.Find(id);
+            DocGia docGia = db.DocGias.Find(int.Parse(id));
             db.DocGias.Remove(docGia);
             db.SaveChanges();
             return RedirectToAction("Index");

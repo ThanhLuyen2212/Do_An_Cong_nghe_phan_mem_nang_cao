@@ -1,92 +1,94 @@
-﻿
+﻿<!DOCTYPE html>
+<html lang="zxx">
 
-<!DOCTYPE html>
-<html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
+    <meta name="description" content="Ashion Template">
+    <meta name="keywords" content="Ashion, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <script src="~/Scripts/scripts.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Thư viện</title>
 
-    <style>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
 
-        #div-footer {
-            bottom: 0px;
-            left: 0;
-        }
-
-        .footer {
-            width: 100%;
-            background-color: black;
-            color: white;
-            position: absolute;
-        }
-
-
-        #animation-top5 {
-            color: white;
-            text-shadow: 1px 1px 2px gray, 0 0 25px red, 0 0 5px red;
-        }
-    </style>
-
-
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="~/Assets/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Assets/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Assets/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/Assets/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Assets/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="~/Assets/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Assets/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/Assets/css/style.css" type="text/css">
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Quản Lý Thư Viện", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="@Url.Action("Index","QLDocGia")">Độc giả</a>
-                    </li>
+    <!-- Page Preloder -->
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
 
-                    <li>
-                        <a href="@Url.Action("Index","QLSach")"> Quản lý Sách</a>
-                    </li>
-
-                    <li>
-                        <a href="@Url.Action("Index","QLPhieuMuon")">Phiếu Mượn</a>
-                    </li>
-
-                    <li>
-                        <a href="@Url.Action("Index","ChiTiet")"> Chi Tiết Phiếu Mượn</a>
-                    </li>
-                    <li>
-                        <a href="/ThongKe/ThongKe">Thống Kê Sách Cho Mượn</a>
-                    </li>
-                    <li>
-                        <a href="/Categories/Index">Thể Loại</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="@Url.Action("Index","Login")">LogOut</a>
-                    </li>
-                </ul>
-            </div>
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__close">+</div>
+        <ul class="offcanvas__widget">
+            <li><span class="icon_search search-switch"></span></li>
+            <li>
+                <a href="#">
+                    <span class="icon_heart_alt"></span>
+                    <div class="tip">2</div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="icon_bag_alt"></span>
+                    <div class="tip">2</div>
+                </a>
+            </li>
+        </ul>
+        <div class="offcanvas__logo">
+            <a href="~/Home/Index">   <img src="~/Images/desktop-computer.png" />  </a>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+        <div class="offcanvas__auth">
+            <a href="#">Login</a>
+            <a href="#">Register</a>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+    <!-- Offcanvas Menu End -->
+    <!-- Header Section Begin -->
+    @Html.Partial("Header")
+    <!-- Header Section End -->
+    @RenderBody()
+    <!-- Footer Section Begin -->
+    @Html.Partial("Footer")
+    <!-- Footer Section End -->
+    <!-- Search Begin -->
+    <div class="search-model">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-switch">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Search here.....">
+            </form>
+        </div>
     </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <!-- Search End -->
+    <!-- Js Plugins -->
+    <script src="~/Assets/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Assets/js/bootstrap.min.js"></script>
+    <script src="~/Assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Assets/js/jquery-ui.min.js"></script>
+    <script src="~/Assets/js/mixitup.min.js"></script>
+    <script src="~/Assets/js/jquery.countdown.min.js"></script>
+    <script src="~/Assets/js/jquery.slicknav.js"></script>
+    <script src="~/Assets/js/owl.carousel.min.js"></script>
+    <script src="~/Assets/js/jquery.nicescroll.min.js"></script>
+    <script src="~/Assets/js/main.js"></script>
 </body>
+
 </html>
+

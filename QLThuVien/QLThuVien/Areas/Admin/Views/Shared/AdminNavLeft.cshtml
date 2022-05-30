@@ -1,0 +1,105 @@
+﻿<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+        <a class="sidebar-brand brand-logo" href="~/Admin/AdminHome/Index" style="width:100%">
+            <img style="height: 30px; width:30px; float:left" src="~/Areas/Admin/Assets/images/bookshelf.png" alt="logo" /> <h5 style="color:white">QL THƯ VIỆN</h5>
+        </a>
+
+        <a class="sidebar-brand brand-logo-mini" href="~/Admin/AdminHome/Index">
+            <p style="color:white; width:100%">
+                <img style="height: 42px; width:42px; float:left" src="~/Areas/Admin/Assets/images/bookshelf.png" alt="logo" />
+            </p>
+        </a>
+    </div>
+    <ul class="nav">
+        <li class="nav-item profile">
+            <div class="profile-desc">
+                <div class="profile-pic">
+                    <div class="count-indicator">
+                        <img class="img-xs rounded-circle " src="~/Areas/Admin/Assets/images/faces/user.png" alt="">
+
+                    </div>
+                    <div class="profile-name">
+                        <h5 class="mb-0 font-weight-normal">@Session["TenAdmin"]</h5>
+                        <span>Admin</span>
+                    </div>
+                </div>
+                <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
+                <div class="dropdown-menu dropdown-menu-right sidebar-dropdown preview-list" aria-labelledby="profile-dropdown">
+
+                    <a href="#" class="dropdown-item preview-item">
+                        <div class="preview-thumbnail">
+                            <div class="preview-icon bg-dark rounded-circle">
+                                <i class="mdi mdi-onepassword  text-info"></i>
+                            </div>
+                        </div>
+                        <div class="preview-item-content">
+                            <p class="preview-subject ellipsis mb-1 text-small">Thay đổi mật khẩu</p>
+                        </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item preview-item">
+                        <div class="preview-thumbnail">
+                            <div class="preview-icon bg-dark rounded-circle">
+                                <i class="mdi mdi-calendar-today text-success"></i>
+                            </div>
+                        </div>
+                        <div class="preview-item-content">
+                            <p class="preview-subject ellipsis mb-1 text-small">Thông tin tài khoản</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item nav-category">
+            <span class="nav-link">Navigation</span>
+        </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="~/Admin/AdminHome/Index">
+                <span class="menu-icon">
+                    <i class="mdi mdi-speedometer"></i>
+                </span>
+                <span class="menu-title">Thống kê</span>
+            </a>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="~/Admin/AdminSaches/Index">
+                <span class="menu-icon">
+                    <i class="mdi mdi-playlist-play"></i>
+                </span>
+                <span class="menu-title">Quản lý sách</span>
+            </a>
+        </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="~/Admin/AdminTheLoais/Index">
+                <span class="menu-icon">
+                    <i class="mdi mdi-contacts"></i>
+                </span>
+                <span class="menu-title">Thể loại sách</span>
+            </a>
+        </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="~/Admin/AdminPhieuMuons/Index">
+                <span class="menu-icon">
+                    <i class="mdi mdi-chart-bar"></i>
+                </span>
+                <span class="menu-title">Quản lý phiếu mượn</span>
+            </a>
+        </li>
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="~/Admin/AdminDocgias/Index">
+                <span class="menu-icon">
+                    <i class="mdi mdi-contacts"></i>
+                </span>
+                <span class="menu-title">Quản lý độc giả</span>
+            </a>
+        </li>
+
+        <li class="nav-item menu-items">
+            <a class="nav-link" href="~/Admin/AdminsRegister/Index">
+                <span class="menu-icon">
+                    <i class="mdi mdi-contacts"></i>
+                </span>
+                <span class="menu-title">Tài khoản Admin</span>
+            </a>
+        </li>
+    </ul>
+</nav>

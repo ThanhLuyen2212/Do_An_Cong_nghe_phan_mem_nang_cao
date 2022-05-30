@@ -17,16 +17,13 @@ namespace QLThuVien.Controllers
             
             if (id == null)
             {
-                return RedirectToAction("Index", "ListBook");
+                return RedirectToAction("Index", "Sach");
             }
             else
             {
-                Sach sach = new Sach();
-                sach =  db.Saches.FirstOrDefault( n => n.IDSach.Equals(id));               
-                ViewBag.sach = sach;
-                return View();
-            } 
 
+                return View(db.Saches.FirstOrDefault(n => n.IDSach.Equals(id)));
+            }
         }
     }
 }

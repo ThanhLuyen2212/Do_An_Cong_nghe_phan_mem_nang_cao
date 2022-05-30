@@ -16,33 +16,29 @@ namespace QLThuVien.Models
 
     public partial class Sach
     {
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Sach()
         {
             this.ChiTietSaches = new HashSet<ChiTietSach>();
             this.CT_PM = new HashSet<CT_PM>();
-            HinhAnh = "~/Content/Image/sach.jpg";
+            HinhAnh = "~/Images/sach.jpg";
         }
     
         public string IDSach { get; set; }
         public string TenSach { get; set; }
-        public string TheLoai { get; set; }
+        public Nullable<int> TheLoai { get; set; }
         public string MoTa { get; set; }
         public string TacGia { get; set; }
-
-      
         public Nullable<System.DateTime> NgayXuatBan { get; set; }
         public Nullable<int> SoLuong { get; set; }
         public string HinhAnh { get; set; }
-
-        [NotMapped]
-        public HttpPostedFileBase UploadImage { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietSach> ChiTietSaches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PM> CT_PM { get; set; }
         public virtual TheLoai TheLoai1 { get; set; }
+        [NotMapped]
+        public HttpPostedFileBase UploadImage { get; set; }
     }
 }

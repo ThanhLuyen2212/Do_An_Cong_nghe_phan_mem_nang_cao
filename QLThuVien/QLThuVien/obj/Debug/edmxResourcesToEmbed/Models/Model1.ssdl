@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="QuanLyThuVienModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="IDAdmin" />
+    </Key>
+    <Property Name="IDAdmin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenAdmin" Type="nvarchar" MaxLength="50" />
+    <Property Name="DienThoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="ChiTietSach">
     <Key>
       <PropertyRef Name="IDChiTietSach" />
@@ -12,29 +23,16 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IDPM" Type="int" />
-    <Property Name="IDDG" Type="nvarchar" MaxLength="50" />
-    <Property Name="TenDG" Type="nvarchar" MaxLength="50" />
     <Property Name="IDSach" Type="nvarchar" MaxLength="10" />
-    <Property Name="TenSach" Type="nvarchar" MaxLength="50" />
     <Property Name="SoLuong" Type="int" />
-    <Property Name="TrangThai" Type="nvarchar" MaxLength="50" />
-    <Property Name="NgayTraThucTe" Type="datetime" />
-  </EntityType>
-  <EntityType Name="DangNhap">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
-    <Property Name="Password" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="DocGia">
     <Key>
       <PropertyRef Name="IDDG" />
     </Key>
-    <Property Name="IDDG" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IDDG" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TenDG" Type="nvarchar" MaxLength="50" />
     <Property Name="DienThoai" Type="nvarchar" MaxLength="50" />
     <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
@@ -45,13 +43,15 @@
     <Key>
       <PropertyRef Name="IDPM" />
     </Key>
-    <Property Name="IDPM" Type="int" Nullable="false" />
-    <Property Name="IDDG" Type="nvarchar" MaxLength="50" />
+    <Property Name="IDPM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDDG" Type="int" />
     <Property Name="TenDG" Type="nvarchar" MaxLength="50" />
     <Property Name="NgayMuon" Type="datetime" />
     <Property Name="NgayTra" Type="datetime" />
+    <Property Name="NgayTraThucTe" Type="datetime" />
     <Property Name="TienPhat" Type="int" />
     <Property Name="GhiChu" Type="nvarchar" MaxLength="50" />
+    <Property Name="TrangThai" Type="int" />
   </EntityType>
   <EntityType Name="Sach">
     <Key>
@@ -59,7 +59,7 @@
     </Key>
     <Property Name="IDSach" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="TenSach" Type="nvarchar" MaxLength="50" />
-    <Property Name="TheLoai" Type="nvarchar" MaxLength="50" />
+    <Property Name="TheLoai" Type="int" />
     <Property Name="MoTa" Type="nvarchar(max)" />
     <Property Name="TacGia" Type="nvarchar" MaxLength="50" />
     <Property Name="NgayXuatBan" Type="datetime" />
@@ -70,20 +70,20 @@
     <Key>
       <PropertyRef Name="IDCate" />
     </Key>
-    <Property Name="ID" Type="int" />
-    <Property Name="IDCate" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IDCate" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NameCate" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="TrangThai">
     <Key>
-      <PropertyRef Name="IDTT" />
+      <PropertyRef Name="IDTrangThai" />
     </Key>
-    <Property Name="ID" Type="int" />
-    <Property Name="IDTT" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="TT" Type="nvarchar" MaxLength="50" />
+    <Property Name="IDTrangThai" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenTrangThai" Type="nvarchar" MaxLength="20" />
   </EntityType>
   <Association Name="FK_ChiTietSach_Sach">
-    <End Role="Sach" Type="Self.Sach" Multiplicity="0..1" />
+    <End Role="Sach" Type="Self.Sach" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="ChiTietSach" Type="Self.ChiTietSach" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Sach">
@@ -94,20 +94,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CT_PM_DocGia">
-    <End Role="DocGia" Type="Self.DocGia" Multiplicity="0..1" />
-    <End Role="CT_PM" Type="Self.CT_PM" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DocGia">
-        <PropertyRef Name="IDDG" />
-      </Principal>
-      <Dependent Role="CT_PM">
-        <PropertyRef Name="IDDG" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_CT_PM_PhieuMuon">
-    <End Role="PhieuMuon" Type="Self.PhieuMuon" Multiplicity="0..1" />
+    <End Role="PhieuMuon" Type="Self.PhieuMuon" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="CT_PM" Type="Self.CT_PM" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="PhieuMuon">
@@ -130,18 +120,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_CT_PM_TrangThai">
-    <End Role="TrangThai" Type="Self.TrangThai" Multiplicity="0..1" />
-    <End Role="CT_PM" Type="Self.CT_PM" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TrangThai">
-        <PropertyRef Name="IDTT" />
-      </Principal>
-      <Dependent Role="CT_PM">
-        <PropertyRef Name="TrangThai" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_PHIEUMUON_DOCGIA">
     <End Role="DocGia" Type="Self.DocGia" Multiplicity="0..1" />
     <End Role="PhieuMuon" Type="Self.PhieuMuon" Multiplicity="*" />
@@ -151,6 +129,18 @@
       </Principal>
       <Dependent Role="PhieuMuon">
         <PropertyRef Name="IDDG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PHIEUMUON_TRANGTHAI">
+    <End Role="TrangThai" Type="Self.TrangThai" Multiplicity="0..1" />
+    <End Role="PhieuMuon" Type="Self.PhieuMuon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TrangThai">
+        <PropertyRef Name="IDTrangThai" />
+      </Principal>
+      <Dependent Role="PhieuMuon">
+        <PropertyRef Name="TrangThai" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -167,9 +157,9 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="QuanLyThuVienModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ChiTietSach" EntityType="Self.ChiTietSach" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CT_PM" EntityType="Self.CT_PM" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="DangNhap" EntityType="Self.DangNhap" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DocGia" EntityType="Self.DocGia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PhieuMuon" EntityType="Self.PhieuMuon" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sach" EntityType="Self.Sach" Schema="dbo" store:Type="Tables" />
@@ -179,10 +169,6 @@
       <End Role="Sach" EntitySet="Sach" />
       <End Role="ChiTietSach" EntitySet="ChiTietSach" />
     </AssociationSet>
-    <AssociationSet Name="FK_CT_PM_DocGia" Association="Self.FK_CT_PM_DocGia">
-      <End Role="DocGia" EntitySet="DocGia" />
-      <End Role="CT_PM" EntitySet="CT_PM" />
-    </AssociationSet>
     <AssociationSet Name="FK_CT_PM_PhieuMuon" Association="Self.FK_CT_PM_PhieuMuon">
       <End Role="PhieuMuon" EntitySet="PhieuMuon" />
       <End Role="CT_PM" EntitySet="CT_PM" />
@@ -191,12 +177,12 @@
       <End Role="Sach" EntitySet="Sach" />
       <End Role="CT_PM" EntitySet="CT_PM" />
     </AssociationSet>
-    <AssociationSet Name="FK_CT_PM_TrangThai" Association="Self.FK_CT_PM_TrangThai">
-      <End Role="TrangThai" EntitySet="TrangThai" />
-      <End Role="CT_PM" EntitySet="CT_PM" />
-    </AssociationSet>
     <AssociationSet Name="FK_PHIEUMUON_DOCGIA" Association="Self.FK_PHIEUMUON_DOCGIA">
       <End Role="DocGia" EntitySet="DocGia" />
+      <End Role="PhieuMuon" EntitySet="PhieuMuon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PHIEUMUON_TRANGTHAI" Association="Self.FK_PHIEUMUON_TRANGTHAI">
+      <End Role="TrangThai" EntitySet="TrangThai" />
       <End Role="PhieuMuon" EntitySet="PhieuMuon" />
     </AssociationSet>
     <AssociationSet Name="FK_SACH_THELOAI" Association="Self.FK_SACH_THELOAI">

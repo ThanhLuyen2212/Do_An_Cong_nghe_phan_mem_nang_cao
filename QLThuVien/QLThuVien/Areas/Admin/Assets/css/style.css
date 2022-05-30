@@ -7621,6 +7621,7 @@ caption {
 
 th {
   text-align: inherit;
+  color:white;
   text-align: -webkit-match-parent; }
 
 label {
@@ -17887,7 +17888,7 @@ div.tagsinput {
     border-top: 0;
     border-bottom-width: 1px;
     font-weight: 500;
-    color: #6c7293; }
+    color: white; }
     .table thead th i, .jsgrid .jsgrid-table thead th i {
       margin-left: 0.325rem; }
   .table th, .jsgrid .jsgrid-table th,
@@ -19159,7 +19160,7 @@ body.avgrund-active {
       .lightGallery .image-tile .demo-gallery-poster img {
         display: block;
         margin: auto;
-        width: 40%;
+        width: 100%;
         max-width: 60px;
         min-width: 20px; }
     .lightGallery .image-tile img {
@@ -20367,6 +20368,7 @@ div.tagsinput {
       margin-right: 0;
       padding: 0rem 0rem 0rem 1.3rem;
       width: 100%; }
+
       .navbar .navbar-brand-wrapper .navbar-brand:active, .navbar .navbar-brand-wrapper .navbar-brand:focus, .navbar .navbar-brand-wrapper .navbar-brand:hover {
         color: #252b3e; }
       .navbar .navbar-brand-wrapper .navbar-brand img {

@@ -17,19 +17,16 @@ namespace QLThuVien.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DocGia()
         {
-            this.CT_PM = new HashSet<CT_PM>();
             this.PhieuMuons = new HashSet<PhieuMuon>();
         }
     
-        public string IDDG { get; set; }
+        public int IDDG { get; set; }
         public string TenDG { get; set; }
         public string DienThoai { get; set; }
         public string DiaChi { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CT_PM> CT_PM { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuMuon> PhieuMuons { get; set; }
     }

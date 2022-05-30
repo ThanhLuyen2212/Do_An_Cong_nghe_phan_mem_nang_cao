@@ -1,6 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="QuanLyThuVienModelStoreContainer" CdmEntityContainer="QuanLyThuVienEntities">
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="QuanLyThuVienModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="IDAdmin" ColumnName="IDAdmin" />
+          <ScalarProperty Name="TenAdmin" ColumnName="TenAdmin" />
+          <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ChiTietSaches">
       <EntityTypeMapping TypeName="QuanLyThuVienModel.ChiTietSach">
         <MappingFragment StoreEntitySet="ChiTietSach">
@@ -15,22 +27,8 @@
         <MappingFragment StoreEntitySet="CT_PM">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="IDPM" ColumnName="IDPM" />
-          <ScalarProperty Name="IDDG" ColumnName="IDDG" />
-          <ScalarProperty Name="TenDG" ColumnName="TenDG" />
           <ScalarProperty Name="IDSach" ColumnName="IDSach" />
-          <ScalarProperty Name="TenSach" ColumnName="TenSach" />
           <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
-          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-          <ScalarProperty Name="NgayTraThucTe" ColumnName="NgayTraThucTe" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DangNhaps">
-      <EntityTypeMapping TypeName="QuanLyThuVienModel.DangNhap">
-        <MappingFragment StoreEntitySet="DangNhap">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -54,8 +52,10 @@
           <ScalarProperty Name="TenDG" ColumnName="TenDG" />
           <ScalarProperty Name="NgayMuon" ColumnName="NgayMuon" />
           <ScalarProperty Name="NgayTra" ColumnName="NgayTra" />
+          <ScalarProperty Name="NgayTraThucTe" ColumnName="NgayTraThucTe" />
           <ScalarProperty Name="TienPhat" ColumnName="TienPhat" />
           <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -76,7 +76,6 @@
     <EntitySetMapping Name="TheLoais">
       <EntityTypeMapping TypeName="QuanLyThuVienModel.TheLoai">
         <MappingFragment StoreEntitySet="TheLoai">
-          <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="IDCate" ColumnName="IDCate" />
           <ScalarProperty Name="NameCate" ColumnName="NameCate" />
         </MappingFragment>
@@ -85,9 +84,8 @@
     <EntitySetMapping Name="TrangThais">
       <EntityTypeMapping TypeName="QuanLyThuVienModel.TrangThai">
         <MappingFragment StoreEntitySet="TrangThai">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="IDTT" ColumnName="IDTT" />
-          <ScalarProperty Name="TT" ColumnName="TT" />
+          <ScalarProperty Name="IDTrangThai" ColumnName="IDTrangThai" />
+          <ScalarProperty Name="TenTrangThai" ColumnName="TenTrangThai" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

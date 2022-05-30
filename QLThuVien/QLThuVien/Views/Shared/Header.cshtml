@@ -1,0 +1,135 @@
+﻿@using QLThuVien.Models;
+@{
+    DocGia docGia = Session["DocGia"] as DocGia;
+
+
+}
+<header class="header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-3 col-lg-2">
+                <div class="header__logo">
+                    <a href="~/Home/Index">
+                        <img src="~/Areas/Admin/Assets/images/bookshelf.png" width="55px" style="display:inline-block; padding-right:10px;margin-left:30px" />
+                        <h4 style="font-style:initial ;display:inline-block">Thư Viện</h4>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-7">
+                <nav class="header__menu" style="margin-left:200px">
+                    <ul>
+                        <li><a href="~/Home/index">Home</a></li>
+                        <li><a href="~/Sach/index">Sách</a></li>
+                        @if (Session["DocGia"] != null)
+                        {
+                            if (Session["GioSach"] != null)
+                            {
+                                <li><a href="~/GioSach/show">Giỏ sách</a></li>
+                            }
+                            <li><a href="~/CacCuonSachDaMuon/Index">Các cuốn sách đã mượn</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="~/GioSach/show">Giỏ sách</a></li>
+                            <li><a href="~/CacCuonSachDaMuon/Index">Các cuốn sách đã mượn</a></li>
+                        }
+
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-lg-3">
+                <div class="header__right" style="margin-right:50px">
+
+                    @if (Session["DocGia"] == null)
+                    {
+                        <div class="header__right__auth">
+                            <a href="~/Login/Index">Login</a>
+                            <a href="~/Login/Register">Register</a>
+                        </div>
+                    }
+                    else
+                    {
+                <div class="header__right__auth">
+                   
+                    <div class="dropdown">
+                        <p style="float:right; margin-top:5px; margin-left:10px">@docGia.TenDG</p>
+                        <button class="dropbtn" />
+
+                        <div class="dropdown-content">
+                            <ul style="list-style:none">
+                                <li>
+                                    <a href="~/Login/index">
+                                        Logout
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="~/ThongTinCaNhan/index">
+                                        Thông tin cá nhân
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="canvas__open">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+</header>
+
+
+<style>
+    /* Dropdown Button */
+    .dropbtn {
+
+        background-image : url('@Url.Content("~/Images/user.png")');
+        background-color:white;
+        font-size: 12px;
+        border: none;
+       width:30px;
+       height:30px;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            /* Change color of dropdown links on hover */
+            .dropdown-content a:hover {
+                background-color: floralwhite;
+            }
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+        background-color: floralwhite;
+    }
+</style>

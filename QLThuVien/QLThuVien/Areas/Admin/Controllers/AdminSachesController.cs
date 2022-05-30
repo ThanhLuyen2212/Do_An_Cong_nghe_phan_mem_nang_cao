@@ -16,17 +16,28 @@ namespace QLThuVien.Areas.Admin.Controllers
         private QuanLyThuVienEntities db = new QuanLyThuVienEntities();
 
         // GET: Admin/AdminSaches
-       
-        public ActionResult Index(String tensach)
+        public ActionResult Index(string tensach)
         {
-            if(tensach == null)
+            if (Session["UserName"] == null)
             {
-                return View(db.Saches.ToList());
+                return RedirectToAction("Index", "AdminLogin", new { Areas = "Admin" });
             }
             else
             {
-                return View(db.Saches.Where(s => s.TenSach == tensach).ToList());
-            }
+                if(tensach == null)
+                {                    
+                    return View(db.Saches.ToList());
+                }
+                else if (tensach.Equals(""))
+                {
+                    return View(db.Saches.ToList());
+                }
+                else
+                {                    
+                    return View(db.Saches.Where(s => s.TenSach.Equals(tensach)).ToList());
+                }
+               
+            }           
         }
 
         // GET: Admin/AdminSaches/Details/5
@@ -46,10 +57,9 @@ namespace QLThuVien.Areas.Admin.Controllers
 
         // GET: Admin/AdminSaches/Create
         public ActionResult Create()
-        {
-            List<TheLoai> list = db.TheLoais.ToList();
-            ViewBag.listcate = new SelectList(list, "IDCate", "NameCate", "");
-
+        {  
+            List<TheLoai> list = db.TheLoais.ToList();          
+            ViewBag.TheLoai = new SelectList(db.TheLoais, "IDCate", "NameCate");
             Sach sach = new Sach();
             return View(sach);
         }
@@ -57,9 +67,10 @@ namespace QLThuVien.Areas.Admin.Controllers
         // POST: Admin/AdminSaches/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+       
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TenSach,TheLoai,MoTa,TacGia,NgayXuatBan,SoLuong,HinhAnh")] Sach sach)
+        [HttpPost]
+        public ActionResult Create(Sach sach)
         {
             try
             {
@@ -70,21 +81,19 @@ namespace QLThuVien.Areas.Admin.Controllers
                     string filename = Path.GetFileNameWithoutExtension(sach.UploadImage.FileName);
                     string ex = Path.GetExtension(sach.UploadImage.FileName);
                     filename = filename + ex;
-                    sach.HinhAnh = "~/Image/" + filename;
-                    sach.UploadImage.SaveAs(Path.Combine(Server.MapPath("~/Image/"), filename));
-
+                    sach.HinhAnh = "~/Images/" + filename;
+                    sach.UploadImage.SaveAs(Path.Combine(Server.MapPath("~/Images/"), filename));
                 }
-                sach.IDSach = "1";
-                ViewBag.listcate = new SelectList(list, "IDCate", "NameCate", 1);
+                ViewBag.listcase = new SelectList(list, "IDCate", "NameCate", 1);
                 db.Saches.Add(sach);
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+        }
             catch
             {
                 return Content("<script language='javascript' type='text/javascript'>alert ('Vui lòng kiểm tra lại thông tin!');</script>");
-            }
-        }
+    }
+}
 
         // GET: Admin/AdminSaches/Edit/5
         public ActionResult Edit(string id)
@@ -139,11 +148,18 @@ namespace QLThuVien.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            
-            Sach sach = db.Saches.Find(id);
-            db.Saches.Remove(sach);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                Sach sach = db.Saches.Find(id);
+                db.Saches.Remove(sach);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return Content("<script language='javascript' type='text/javascript'>alert     ('Cuốn sách này đang đươc mượn!');</script>");
+            }
+    
         }
 
         protected override void Dispose(bool disposing)

@@ -26,25 +26,53 @@ namespace QLThuVien.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             return View();
         }
 
         public ActionResult Addto(string id)
         {
-            var gio = data.Saches.SingleOrDefault(s => s.IDSach == id);
-            if (gio != null)
+            if (Session["UserName"] == null)
             {
-                GetSach().Add(gio);
+                return RedirectToAction("Index", "Login");
             }
-            return RedirectToAction("Show", "GioSach");
+            else
+            {
+                var gio = data.Saches.SingleOrDefault(s => s.IDSach == id);
+                if (gio != null)
+                {
+                    GetSach().Add(gio);
+                }
+                return RedirectToAction("Show", "GioSach");
+            }
         }
 
         public ActionResult Show()
         {
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }
             if (Session["GioSach"] == null)
             {
                 return RedirectToAction("Show", "GioSach");
             }
+
+            var username = Session["UserName"];
+            var password = Session["Password"];
+            DocGia dg = data.DocGias.FirstOrDefault(s => s.UserName == username && s.Password == password);
+
+            if (dg != null)
+            {
+
+                ViewBag.IDDG = dg.IDDG;
+                ViewBag.TenDG = dg.TenDG;
+            }
+
             GioSach gio = Session["GioSach"] as GioSach;
             return View(gio);
         }
@@ -98,12 +126,12 @@ namespace QLThuVien.Controllers
             {
                 GioSach gio = Session["GioSach"] as GioSach;
                 PhieuMuon muon = new PhieuMuon();
-
+                muon.IDDG = int.Parse(form["IDdocgia"]);
                 muon.TenDG = form["Tendg"];
                 muon.NgayMuon = DateTime.Now;
-                muon.IDDG = form["IDdocgia"];
                 muon.TienPhat = 0;
                 muon.GhiChu = "";
+                muon.TrangThai = 1;
                 muon.NgayTra = DateTime.Parse(form["NgayTra"]);
 
                 DateTime ngaymuon = Convert.ToDateTime(muon.NgayMuon);
@@ -117,6 +145,28 @@ namespace QLThuVien.Controllers
                     //return Content("Lỗi ! Thời gian mượn tối đa là 15 ngày");
                     return Content("<script language='javascript' type='text/javascript'>alert     ('Lỗi ! Thời gian mượn tối đa là 15 ngày');</script>");
                 }
+
+
+                // check status phieumuon is return
+                List<PhieuMuon> listphieuMuon = data.PhieuMuons.Where(c => c.IDDG == muon.IDDG).ToList();
+                foreach (PhieuMuon item in listphieuMuon)
+                {
+                    if (item.TrangThai == 2 || muon.TrangThai == 1)
+                    {
+                        //return Content("Lỗi ! Chưa trả sách mượn lần trước");
+                        return Content("<script language='javascript' type='text/javascript'>alert     ('Lỗi ! Bạn chưa trả sách đã mượn nên không được mượn');</script>");
+                    }
+                }
+
+                foreach (var pm in data.PhieuMuons.Where(s => s.IDDG == muon.IDDG))
+                {
+                    if (pm.TienPhat != 0)
+                    {
+                        //return Content("Độc giả chưa đóng tiền phạt thì không được mượn thêm sách!");
+                        return Content("<script language='javascript' type='text/javascript'>alert     ('Độc giả chưa đóng tiền phạt thì không được mượn thêm sách!');</script>");
+                    }
+                }
+
                 if (TongSoNgay <= 0)
                 {
                     //return Content("Lỗi ! Vui lòng kiểm tra lại mốc thời gian");
@@ -130,11 +180,10 @@ namespace QLThuVien.Controllers
                     //return Content("Tối đa được mượn 3 loại sách");
                 }
 
-
-
-
-
+                //Add phiếu mượn
                 data.PhieuMuons.Add(muon);
+                data.SaveChanges();
+
 
                 foreach (var item in gio.Item)
                 {
@@ -156,37 +205,16 @@ namespace QLThuVien.Controllers
                     CT_PM Detail = new CT_PM();
                     Detail.IDPM = muon.IDPM;
                     Detail.IDSach = item.giosach.IDSach;
-                    Detail.TenSach = item.giosach.TenSach;
-                    Detail.IDDG = muon.IDDG;
-                    Detail.TenDG = muon.TenDG;
                     Detail.SoLuong = item._soluongSach;
-                    Detail.TrangThai = "Đang Mượn";
 
-                    data.CT_PM.Add(Detail);
 
-                    foreach (var ct in data.CT_PM.Where(s => s.IDDG == muon.IDDG))
-                    {
-                        if (ct.TrangThai != "Đã Trả")
-                        {
-                            //return Content("Độc giả chưa trả sách thì không được mượn thêm sách!");
-                            return Content("<script language='javascript' type='text/javascript'>alert     ('Độc giả chưa trả sách thì không được mượn thêm sách!');</script>");
-                        }
-                    }
-
-                    foreach (var pm in data.PhieuMuons.Where(s => s.IDDG == muon.IDDG))
-                    {
-                        if (pm.TienPhat != 0)
-                        {
-                            //return Content("Độc giả chưa đóng tiền phạt thì không được mượn thêm sách!");
-                            return Content("<script language='javascript' type='text/javascript'>alert     ('Độc giả chưa đóng tiền phạt thì không được mượn thêm sách!');</script>");
-                        }
-                    }
-
+                    // update số lượng sách
                     foreach (var p in data.Saches.Where(s => s.IDSach == Detail.IDSach))
                     {
                         var update_soluong = p.SoLuong - item._soluongSach;
                         p.SoLuong = update_soluong;
                     }
+
                     foreach (var p in data.Saches.Where(s => s.IDSach == Detail.IDSach))
                     {
                         if (p.SoLuong < item._soluongSach)
@@ -195,6 +223,11 @@ namespace QLThuVien.Controllers
                             return Content("<script language='javascript' type='text/javascript'>alert     ('Không đủ sách theo yêu cầu của Độc Giả!');</script>");
                         }
                     }
+
+
+                    //Add chi tiết phiếu mượn
+                    data.CT_PM.Add(Detail);
+                    data.SaveChanges();
                 }
                 data.SaveChanges();
                 gio.clear();

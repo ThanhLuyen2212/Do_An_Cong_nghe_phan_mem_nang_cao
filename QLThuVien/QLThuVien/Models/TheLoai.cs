@@ -20,8 +20,7 @@ namespace QLThuVien.Models
             this.Saches = new HashSet<Sach>();
         }
     
-        public Nullable<int> ID { get; set; }
-        public string IDCate { get; set; }
+        public int IDCate { get; set; }
         public string NameCate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

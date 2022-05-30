@@ -21,7 +21,7 @@ namespace QLThuVien.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminTheLoais/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -46,7 +46,7 @@ namespace QLThuVien.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,IDCate,NameCate")] TheLoai theLoai)
+        public ActionResult Create([Bind(Include = "IDCate,NameCate")] TheLoai theLoai)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +59,7 @@ namespace QLThuVien.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminTheLoais/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -78,7 +78,7 @@ namespace QLThuVien.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,IDCate,NameCate")] TheLoai theLoai)
+        public ActionResult Edit([Bind(Include = "IDCate,NameCate")] TheLoai theLoai)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace QLThuVien.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminTheLoais/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -107,7 +107,7 @@ namespace QLThuVien.Areas.Admin.Controllers
         // POST: Admin/AdminTheLoais/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
             TheLoai theLoai = db.TheLoais.Find(id);
             db.TheLoais.Remove(theLoai);

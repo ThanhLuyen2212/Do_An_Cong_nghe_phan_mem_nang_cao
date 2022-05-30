@@ -15,10 +15,31 @@ namespace QLThuVien.Areas.Admin.Controllers
         private QuanLyThuVienEntities db = new QuanLyThuVienEntities();
 
         // GET: Admin/AdminCT_PM
-        public ActionResult Index()
+        public ActionResult Index(string IDPM)
         {
-            var cT_PM = db.CT_PM.Include(c => c.DocGia).Include(c => c.PhieuMuon).Include(c => c.Sach).Include(c => c.TrangThai1);
-            return View(cT_PM.ToList());
+            if (Session["UserName"] == null)
+            {
+                return RedirectToAction("Index", "AdminLogin", new { Areas = "Admin" });
+            }
+
+            else
+            {
+                if (IDPM == null)
+                {
+                    return View(db.CT_PM.Include(c => c.PhieuMuon).Include(c => c.Sach));
+                }
+                else if (IDPM.Equals(""))
+                {
+                    return View(db.CT_PM.Include(c => c.PhieuMuon).Include(c => c.Sach));
+                }
+                else
+                {
+                    int id = int.Parse(IDPM);
+                    return View(db.CT_PM.Include(c => c.PhieuMuon).Include(c => c.Sach).Where(c => c.IDPM == id));
+                }
+
+            }
+
         }
 
         // GET: Admin/AdminCT_PM/Details/5
@@ -36,37 +57,6 @@ namespace QLThuVien.Areas.Admin.Controllers
             return View(cT_PM);
         }
 
-        // GET: Admin/AdminCT_PM/Create
-        public ActionResult Create()
-        {
-            ViewBag.IDDG = new SelectList(db.DocGias, "IDDG", "TenDG");
-            ViewBag.IDPM = new SelectList(db.PhieuMuons, "IDPM", "IDDG");
-            ViewBag.IDSach = new SelectList(db.Saches, "IDSach", "TenSach");
-            ViewBag.TrangThai = new SelectList(db.TrangThais, "IDTT", "TT");
-            return View();
-        }
-
-        // POST: Admin/AdminCT_PM/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,IDPM,IDDG,TenDG,IDSach,TenSach,SoLuong,TrangThai,NgayTraThucTe")] CT_PM cT_PM)
-        {
-            if (ModelState.IsValid)
-            {
-                db.CT_PM.Add(cT_PM);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.IDDG = new SelectList(db.DocGias, "IDDG", "TenDG", cT_PM.IDDG);
-            ViewBag.IDPM = new SelectList(db.PhieuMuons, "IDPM", "IDDG", cT_PM.IDPM);
-            ViewBag.IDSach = new SelectList(db.Saches, "IDSach", "TenSach", cT_PM.IDSach);
-            ViewBag.TrangThai = new SelectList(db.TrangThais, "IDTT", "TT", cT_PM.TrangThai);
-            return View(cT_PM);
-        }
-
         // GET: Admin/AdminCT_PM/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -79,10 +69,9 @@ namespace QLThuVien.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IDDG = new SelectList(db.DocGias, "IDDG", "TenDG", cT_PM.IDDG);
-            ViewBag.IDPM = new SelectList(db.PhieuMuons, "IDPM", "IDDG", cT_PM.IDPM);
+        
+            ViewBag.IDPM = new SelectList(db.PhieuMuons, "IDPM", "TenDG", cT_PM.IDPM);
             ViewBag.IDSach = new SelectList(db.Saches, "IDSach", "TenSach", cT_PM.IDSach);
-            ViewBag.TrangThai = new SelectList(db.TrangThais, "IDTT", "TT", cT_PM.TrangThai);
             return View(cT_PM);
         }
 
@@ -91,7 +80,7 @@ namespace QLThuVien.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,IDPM,IDDG,TenDG,IDSach,TenSach,SoLuong,TrangThai,NgayTraThucTe")] CT_PM cT_PM)
+        public ActionResult Edit(CT_PM cT_PM)
         {
             if (ModelState.IsValid)
             {
@@ -99,12 +88,12 @@ namespace QLThuVien.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IDDG = new SelectList(db.DocGias, "IDDG", "TenDG", cT_PM.IDDG);
-            ViewBag.IDPM = new SelectList(db.PhieuMuons, "IDPM", "IDDG", cT_PM.IDPM);
+           
+            ViewBag.IDPM = new SelectList(db.PhieuMuons, "IDPM", "TenDG", cT_PM.IDPM);
             ViewBag.IDSach = new SelectList(db.Saches, "IDSach", "TenSach", cT_PM.IDSach);
-            ViewBag.TrangThai = new SelectList(db.TrangThais, "IDTT", "TT", cT_PM.TrangThai);
             return View(cT_PM);
         }
+
 
         // GET: Admin/AdminCT_PM/Delete/5
         public ActionResult Delete(int? id)

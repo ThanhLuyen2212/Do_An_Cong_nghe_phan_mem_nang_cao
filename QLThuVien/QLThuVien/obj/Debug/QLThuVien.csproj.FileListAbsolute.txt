@@ -52,9 +52,19 @@ C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\roslyn\VBCSCompiler.exe
 C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\Antlr3.Runtime.dll
 C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\EntityFramework.dll
+C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\EntityFramework.SqlServer.dll
+C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\EPPlus.dll
+C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\EPPlus.Interfaces.dll
+C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\EPPlus.System.Drawing.dll
 C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\Microsoft.IO.RecyclableMemoryStream.dll
 C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\Newtonsoft.Json.dll
+C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\PagedList.dll
+C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\PagedList.Mvc.dll
+C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\Rotativa.Core.dll
+C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\Rotativa.dll
+C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\Rotativa.MVC.dll
 C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\System.Web.Helpers.dll
 C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\System.Web.Mvc.dll
 C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\System.Web.Optimization.dll
@@ -64,6 +74,11 @@ C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\System.Web.WebPages.dll
 C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\System.Web.WebPages.Razor.dll
 C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\WebGrease.dll
 C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\EntityFramework.xml
+C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\EntityFramework.SqlServer.xml
+C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\EPPlus.xml
+C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\Microsoft.IO.RecyclableMemoryStream.xml
+C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\PagedList.xml
+C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\PagedList.Mvc.xml
 C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\System.Web.Helpers.xml
 C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\System.Web.Mvc.xml
 C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\System.Web.Optimization.xml
@@ -79,5 +94,3 @@ C:\Users\Dell\Desktop\QLThuVien\QLThuVien\obj\Debug\QLThuVien.csproj.CoreCompile
 C:\Users\Dell\Desktop\QLThuVien\QLThuVien\obj\Debug\QLThuVien.csproj.CopyComplete
 C:\Users\Dell\Desktop\QLThuVien\QLThuVien\obj\Debug\QLThuVien.dll
 C:\Users\Dell\Desktop\QLThuVien\QLThuVien\obj\Debug\QLThuVien.pdb
-C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\EntityFramework.SqlServer.dll
-C:\Users\Dell\Desktop\QLThuVien\QLThuVien\bin\EntityFramework.SqlServer.xml

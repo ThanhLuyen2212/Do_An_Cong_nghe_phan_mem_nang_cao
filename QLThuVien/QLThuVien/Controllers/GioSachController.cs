@@ -125,9 +125,10 @@ namespace QLThuVien.Controllers
             try
             {
                 GioSach gio = Session["GioSach"] as GioSach;
+                DocGia docgia = Session["DocGia"] as DocGia;
                 PhieuMuon muon = new PhieuMuon();
-                muon.IDDG = int.Parse(form["IDdocgia"]);
-                muon.TenDG = form["Tendg"];
+                muon.IDDG = docgia.IDDG;
+                muon.TenDG = docgia.TenDG;
                 muon.NgayMuon = DateTime.Now;
                 muon.TienPhat = 0;
                 muon.GhiChu = "";
@@ -196,7 +197,7 @@ namespace QLThuVien.Controllers
                         return Content("<script language='javascript' type='text/javascript'>alert     ('Vui lòng kiểm tra số lượng! Do có sách không còn đủ số lượng');</script>");
                         //return Content("Vui lòng kiểm tra số lượng! Do có sách không còn đủ số lượng");
 
-                    };
+                    }
                     if (tongsach == 0)
                     {
                         return Content("<script language='javascript' type='text/javascript'>alert     ('Không có sách thì không thể tạo phiếu mượn!');</script>");

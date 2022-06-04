@@ -96,14 +96,12 @@ create table CT_PM
 (
 	ID int Identity(1,1) primary key ,
 	IDPM int ,	
-	IDSach nvarchar(10) UNIQUE FOREIGN KEY REFERENCES Sach(IDSach),
-	TenSach nvarchar(50) ,
+	IDSach nvarchar(10),	
 	SoLuong int,	
+	CONSTRAINT FK_CT_PM_Sach FOREIGN KEY (IDSach) REFERENCES Sach(IDSach),
 	CONSTRAINT FK_CT_PM_PhieuMuon FOREIGN KEY (IDPM) REFERENCES PhieuMuon(IDPM),
 )
 go
-
-
 
 insert into TrangThai(TenTrangThai)
 values(N'Đang chờ mượn')
@@ -173,3 +171,10 @@ select * from CT_PM
 select * from PhieuMuon
 delete CT_PM 
 delete PhieuMuon
+select * from DocGia
+select * from Sach
+select * from ChiTietSach
+
+delete from Sach where IDSach = N'Rừn101'
+
+

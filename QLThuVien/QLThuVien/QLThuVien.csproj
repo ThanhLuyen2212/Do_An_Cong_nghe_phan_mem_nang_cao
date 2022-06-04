@@ -169,11 +169,14 @@
     <Compile Include="Areas\Admin\Controllers\AdminSachesController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminsRegisterController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminTheLoaisController.cs" />
-    <Compile Include="Controllers\CacCuonSachDaMuonController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminThongKeController.cs" />
+    <Compile Include="Areas\Admin\Model\ThongKeTheoDocGia.cs" />
+    <Compile Include="Areas\Admin\Model\ThongKeTheoSach.cs" />
     <Compile Include="Controllers\ChiTietCuonSachController.cs" />
     <Compile Include="Controllers\GioSachController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\ThongBaoController.cs" />
     <Compile Include="Controllers\SachController.cs" />
     <Compile Include="Controllers\ThongTinCaNhanController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1340,6 +1343,8 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\AdminThongKe\ThongKeTheoSach.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminThongKe\ThongKeTheoDocGia.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1373,12 +1378,13 @@
     <Content Include="Views\Shared\Header.cshtml" />
     <Content Include="Views\Shared\Footer.cshtml" />
     <Content Include="Views\Sach\Index.cshtml" />
-    <Content Include="Views\CacCuonSachDaMuon\Index.cshtml" />
     <Content Include="Views\ThongTinCaNhan\Index.cshtml" />
+    <Content Include="Views\ThongBao\CacCuonSachDaMuon.cshtml" />
+    <Content Include="Views\ThongBao\TatCaCacPhieuMuon.cshtml" />
+    <Content Include="Views\ThongBao\CacphieuMuonDangChoMuon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Model\" />
     <Folder Include="Views\Default\" />
   </ItemGroup>
   <ItemGroup>
